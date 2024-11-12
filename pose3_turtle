@@ -1,0 +1,71 @@
+
+(start_pose)
+pose: 
+  pose: 
+    position: 
+      x: 1.17209135478
+      y: 0.16619854139
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: -0.089199022673
+      w: 0.996013822371
+
+
+(service_table)
+pose: 
+  pose: 
+    position: 
+      x: 1.31485517409
+      y: 0.164994621649
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: -0.995047420375
+      w: 0.0994013642011
+
+(precison_table)
+
+pose: 
+  pose: 
+    position: 
+      x: 1.9915330219
+      y: 0.795117595907
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: 0.662936165022
+      w: 0.748675925288
+
+
+(container_table)
+pose: 
+  pose: 
+    position: 
+      x: 3.11886554499
+      y: 0.562298623772
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: 0.720998924522
+      w: 0.692936180927
+
+
+(finish_area)
+
+pose: 
+  pose: 
+    position: 
+      x: 3.88212111997
+      y: 1.26688439335
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: 0.72012316893
+      w: 0.693846252112
+
