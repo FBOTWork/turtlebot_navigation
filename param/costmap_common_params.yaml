@@ -1,5 +1,6 @@
 plugins:
   - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer" }
+  - {name: virtual_layer, type: "virtual_layer/VirtualLayer"}
 
 max_obstacle_height: 0.60  # assume something like an arm is mounted on top of the robot
 
@@ -42,15 +43,6 @@ obstacle_layer:
     obstacle_range: 1.5
     raytrace_range: 4.0
     inf_is_valid: true  
-
-  virtual_obstacle:
-    data_type: PointCloud
-    topic: /move_base/local_costmap/obstacles
-    marking: true
-    clearing: false
-    expected_update_rate: 100.0
-    min_obstacle_height: 0.0
-    max_obstacle_height: 2.0
 
 
 # obstacle_layer:
