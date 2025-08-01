@@ -10,18 +10,31 @@ footprint: #[
  #[-0.19, 0.20]]  # if the robot is not circular
  
  
- [[0.28, 0.01], # Vértice 1
- [0.27, 0.1], # Vértice 2  
-  [0.18, 0.18], # Vértice 3 
-  [0.0, 0.2], # Vértice 4 
-  [-0.1414, 0.1414], # Vértice 5 
-  [-0.2, 0.0], # Vértice 6
-  [-0.1414, -0.1414], # Vértice 7 
-  [0.0, -0.2], # Vértice 8 
-  [0.18, -0.235], # Vértice 9
-  [0.41, -0.15], # cesto de carga
-  [0.30, -0.01], # Vértice 11
-  ] # Vértice 12
+#  [[0.28, 0.01], # Vértice 1
+#  [0.27, 0.1], # Vértice 2  
+#   [0.18, 0.18], # Vértice 3 
+#   [0.0, 0.2], # Vértice 4 
+#   [-0.1414, 0.1414], # Vértice 5 
+#   [-0.2, 0.0], # Vértice 6
+#   [-0.1414, -0.1414], # Vértice 7 
+#   [0.0, -0.2], # Vértice 8 
+#   [0.18, -0.22], # Vértice 9
+#   [0.39, -0.15], # Vértice 10
+#   [0.28, -0.01], # Vértice 11
+#   ] # Vértice 12
+
+  [[0.292, 0.011],   # V1
+    [0.281, 0.104],   # V2
+    [0.188, 0.188],   # V3
+    [0.000, 0.212],   # V4
+    [-0.149, 0.149],  # V5
+    [-0.212, 0.000],  # V6
+    [-0.149, -0.149], # V7
+    [0.000, -0.212],  # V8
+    [0.188, -0.188],  # V9
+    [0.281, -0.104],  # V10
+    [0.292, -0.011],
+    ]  # V11
 
   
 
@@ -52,25 +65,16 @@ obstacle_layer:
     min_obstacle_height: 0.0
     max_obstacle_height: 0.2
     observation_persistence: 0.0  # parametros sendo testados
-    obstacle_range: 2.0
+    obstacle_range: 1.5
     raytrace_range: 4.0
     inf_is_valid: true  
-  #bump:
-    #data_type: PointCloud2
-    #topic: mobile_base/sensors/bumper_pointcloud
-    #marking: true
-    #clearing: false
-    #min_obstacle_height: 0.0
-    #max_obstacle_height: 0.15
-  # for debugging only, let's you see the entire voxel grid
+  
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
 inflation_layer:
   enabled:              true
-  cost_scaling_factor:  8.0  # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius:     0.27  # max. distance from an obstacle at which costs are incurred for planning paths.
+  cost_scaling_factor:  4.0  # exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius:     0.4  # max. distance from an obstacle at which costs are incurred for planning paths.
 
 static_layer:
   enabled:              true
-  
-
