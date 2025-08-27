@@ -6,16 +6,15 @@ TebLocalPlannerROS:
 
   ####=== CINEMÁTICA DO ROBÔ (diferencial) ===####
   max_vel_x: 0.40            # m/s
-  max_vel_x_backwards: 0.20  # m/s (permite ré curtinha)
+  max_vel_x_backwards: 0.0  # m/s (permite ré curtinha)
   max_vel_theta: 1.50        # rad/s
   acc_lim_x: 0.50            # m/s^2
   acc_lim_theta: 1.00        # rad/s^2
   min_turning_radius: 0.0    # diferencial
   wheelbase: 0.0             # diferencial
   cmd_angle_instead_rotvel: false
-  footprint_model:
-    type: "polygon"          # footprint conservador p/ Turtlebot2i
-    vertices: [[0.22, 0.18], [0.22, -0.18], [-0.22, -0.18], [-0.22, 0.18]]
+  allow_backwards: false
+
 
   ####=== TOLERÂNCIAS AO OBJETIVO ===####
   xy_goal_tolerance: 0.20    # m
@@ -41,7 +40,7 @@ TebLocalPlannerROS:
   costmap_obstacles_behind_robot_dist: 1.5
   obstacle_poses_affected: 30
   dynamic_obstacle_inflation_dist: 0.6
-  include_dynamic_obstacles: false   # coloque true se tiver detecção/track de obstáculos dinâmicos
+  include_dynamic_obstacles: true   # coloque true se tiver detecção/track de obstáculos dinâmicos
   legacy_obstacle_association: false
   obstacle_association_force_inclusion_factor: 1.5
   obstacle_association_cutoff_factor: 5.0
@@ -64,7 +63,7 @@ TebLocalPlannerROS:
   weight_max_vel_theta: 1.0
   weight_acc_lim_x: 1.0
   weight_acc_lim_theta: 1.0
-  weight_optimaltime: 1.0           # >1 dá caminhos mais curtos, <1 mais suaves
+  weight_optimaltime: 2.0           # >1 dá caminhos mais curtos, <1 mais suaves
   weight_obstacle: 50.0
   weight_inflation: 0.1
   weight_dynamic_obstacle: 10.0      # só afeta se include_dynamic_obstacles = true
