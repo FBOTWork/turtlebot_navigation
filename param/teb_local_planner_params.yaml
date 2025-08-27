@@ -1,0 +1,105 @@
+TebLocalPlannerROS:
+
+  ####=== FRAMES / TÓPICOS ===####
+  odom_topic: odom
+  map_frame: map            # use "map" se seu /cmd_vel deve referenciar mapa global
+
+  ####=== CINEMÁTICA DO ROBÔ (diferencial) ===####
+  max_vel_x: 0.40            # m/s
+  max_vel_x_backwards: 0.20  # m/s (permite ré curtinha)
+  max_vel_theta: 1.50        # rad/s
+  acc_lim_x: 0.50            # m/s^2
+  acc_lim_theta: 1.00        # rad/s^2
+  min_turning_radius: 0.0    # diferencial
+  wheelbase: 0.0             # diferencial
+  cmd_angle_instead_rotvel: false
+  footprint_model:
+    type: "polygon"          # footprint conservador p/ Turtlebot2i
+    vertices: [[0.22, 0.18], [0.22, -0.18], [-0.22, -0.18], [-0.22, 0.18]]
+
+  ####=== TOLERÂNCIAS AO OBJETIVO ===####
+  xy_goal_tolerance: 0.20    # m
+  yaw_goal_tolerance: 0.10   # rad
+  free_goal_vel: false       # zera vel. no alvo (true = chega "rolando")
+
+  ####=== TRAJETÓRIA / AMOSTRAGEM ===####
+  teb_autosize: true
+  dt_ref: 0.30               # passo temporal alvo
+  dt_hysteresis: 0.10
+  min_samples: 3
+  global_plan_overwrite_orientation: true
+  allow_init_with_backwards_motion: false
+  max_global_plan_lookahead_dist: 2.0
+  exact_arc_length: false
+  feasibility_check_no_poses: 5
+  publish_feedback: false
+
+  ####=== OBSTÁCULOS / CUSTOS ===####
+  min_obstacle_dist: 0.20    # distância mínima aos obstáculos (combine com inflation)
+  inflation_dist: 0.40
+  include_costmap_obstacles: true
+  costmap_obstacles_behind_robot_dist: 1.5
+  obstacle_poses_affected: 30
+  dynamic_obstacle_inflation_dist: 0.6
+  include_dynamic_obstacles: false   # coloque true se tiver detecção/track de obstáculos dinâmicos
+  legacy_obstacle_association: false
+  obstacle_association_force_inclusion_factor: 1.5
+  obstacle_association_cutoff_factor: 5.0
+
+  ####=== RESTRIÇÕES DE CINEMÁTICA/CONTROLE ===####
+  # penaliza dirigir para trás longas distâncias
+  weight_kinematics_forward_drive: 1.0
+  # para diferencial, manter não-holonômico ativo
+  weight_kinematics_nh: 1000.0
+  # suavidade de curvas (curvatura)
+  weight_kinematics_turning_radius: 0.0
+
+  ####=== OTIMIZAÇÃO (g2o) ===####
+  no_inner_iterations: 5
+  no_outer_iterations: 4
+  optimization_activate: true
+  optimization_verbose: false
+  penalty_epsilon: 0.1
+  weight_max_vel_x: 2.0
+  weight_max_vel_theta: 1.0
+  weight_acc_lim_x: 1.0
+  weight_acc_lim_theta: 1.0
+  weight_optimaltime: 1.0           # >1 dá caminhos mais curtos, <1 mais suaves
+  weight_obstacle: 50.0
+  weight_inflation: 0.1
+  weight_dynamic_obstacle: 10.0      # só afeta se include_dynamic_obstacles = true
+  weight_viapoint: 1.0               # use se você alimentar via-points
+  weight_prefer_rotdir: 5.0
+  weight_adapt_factor: 2.0
+
+  ####=== HOMOTOPIA (múltiplas classes de caminho) ===####
+  enable_homotopy_class_planning: true
+  enable_multithreading: true
+  max_number_classes: 4
+  selection_obst_cost_scale: 1.0
+  selection_viapoint_cost_scale: 1.0
+  selection_alternative_time_cost: false
+  roadmap_graph_no_samples: 15
+  roadmap_graph_area_width: 5.0
+  h_signature_prescaler: 0.5
+  h_signature_threshold: 0.1
+  obstacle_keypoint_offset: 0.1
+  obstacle_heading_threshold: 0.45
+  visualize_hc_graph: false
+
+  ####=== RECOVERY / COMPORTAMENTOS DE SAÍDA ===####
+  shrink_horizon_backup: true        # encolhe horizonte quando preso
+  shrink_horizon_min_duration: 10.0
+  oscillation_recovery: true         # alterna preferências p/ sair de oscilação
+  allow_init_with_backwards_motion: false
+
+  ####=== COMPATIBILIDADE COM COSTMAP / GLOBAL PLAN ===####
+  # Se o global planner publicar orientação alinhada ao gradiente do custo, mantenha true
+  global_plan_viapoint_sep: -1.0     # >0 para criar via-points automáticos ao longo do plano global
+  global_plan_prune_distance: 1.0
+
+  ####=== RATE / SAÍDAS ===####
+  control_look_ahead_poses: 1
+  force_reinit_new_goal_dist: 1.0
+  # Para depuração:
+  # publish_feedback: true
