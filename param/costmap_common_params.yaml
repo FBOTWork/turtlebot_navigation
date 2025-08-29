@@ -56,10 +56,10 @@ obstacle_layer:
   #z_resolution: 0.2
   #z_voxels: 2
   publish_voxel_map: false
-  observation_sources: scan
+  observation_sources: scan 
   scan:
     data_type: LaserScan
-    topic: scan
+    observation_sources: scan, virtual_obstacles
     marking: true   # whether the sensor will be used to add obstacle information to the costmap
     clearing: true  # whether the sensor will be used to clear obstacle information from the costmap
     min_obstacle_height: 0.0
@@ -71,15 +71,15 @@ obstacle_layer:
   
 
   
-  # virtual_obstacles:
-  #   data_type: PointCloud2
-  #   topic: /virtual_obstacles
-  #   marking: true
-  #   clearing: false
-  #   expected_update_rate: 5.0  # Reduzido para 5Hz (timer do código publica a 5Hz)
-  #   min_obstacle_height: -0.1
-  #   max_obstacle_height: 2.0
-  #   observation_persistence: 120.0  # Manter obstáculos por 30 segundos
+  virtual_obstacles:
+    data_type: PointCloud2
+    topic: /virtual_obstacles
+    marking: true
+    clearing: false
+    expected_update_rate: 5.0  # Reduzido para 5Hz (timer do código publica a 5Hz)
+    min_obstacle_height: -0.1
+    max_obstacle_height: 2.0
+    observation_persistence: 120.0  # Manter obstáculos por 30 segundos
 
 
 
