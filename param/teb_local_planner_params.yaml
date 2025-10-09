@@ -5,15 +5,15 @@ TebLocalPlannerROS:
   map_frame: map            # use "map" se seu /cmd_vel deve referenciar mapa global
 
   ####=== CINEMÁTICA DO ROBÔ (diferencial) ===####
-  max_vel_x: 0.5            # m/s
-  max_vel_x_backwards: 0.0  # m/s (permite ré curtinha)
+  max_vel_x: 0.4            # m/s
+  max_vel_x_backwards: 0.2   # m/s (permite ré curtinha)
   max_vel_theta: 1.50        # rad/s
   acc_lim_x: 0.30            # m/s^2
   acc_lim_theta: 1.00        # rad/s^2
   min_turning_radius: 0.0    # diferencial
   wheelbase: 0.0             # diferencial
   cmd_angle_instead_rotvel: false
-  allow_backwards: false
+  allow_backwards: true
 
 
   ####=== TOLERÂNCIAS AO OBJETIVO ===####
@@ -27,7 +27,7 @@ TebLocalPlannerROS:
   dt_hysteresis: 0.10
   min_samples: 3
   global_plan_overwrite_orientation: true
-  allow_init_with_backwards_motion: false
+  allow_init_with_backwards_motion: true
   max_global_plan_lookahead_dist: 2.0
   exact_arc_length: false
   feasibility_check_no_poses: 5
@@ -47,7 +47,7 @@ TebLocalPlannerROS:
 
   ####=== RESTRIÇÕES DE CINEMÁTICA/CONTROLE ===####
   # penaliza dirigir para trás longas distâncias
-  weight_kinematics_forward_drive: 1.0
+  weight_kinematics_forward_drive: 2.5
   # para diferencial, manter não-holonômico ativo
   weight_kinematics_nh: 1000.0
   # suavidade de curvas (curvatura)
@@ -63,7 +63,7 @@ TebLocalPlannerROS:
   weight_max_vel_theta: 1.0
   weight_acc_lim_x: 1.0
   weight_acc_lim_theta: 1.0
-  weight_optimaltime: 1.0           # >1 dá caminhos mais curtos, <1 mais suaves
+  weight_optimaltime: 0.5           # >1 dá caminhos mais curtos, <1 mais suaves
   weight_obstacle: 50.0
   weight_inflation: 0.1
   weight_dynamic_obstacle: 10.0      # só afeta se include_dynamic_obstacles = true
@@ -84,7 +84,7 @@ TebLocalPlannerROS:
   h_signature_threshold: 0.1
   obstacle_keypoint_offset: 0.1
   obstacle_heading_threshold: 0.45
-  visualize_hc_graph: false
+  visualize_hc_graph: true
 
   ####=== RECOVERY / COMPORTAMENTOS DE SAÍDA ===####
   shrink_horizon_backup: true        # encolhe horizonte quando preso
@@ -94,7 +94,7 @@ TebLocalPlannerROS:
 
   ####=== COMPATIBILIDADE COM COSTMAP / GLOBAL PLAN ===####
   # Se o global planner publicar orientação alinhada ao gradiente do custo, mantenha true
-  global_plan_viapoint_sep: -1.0     # >0 para criar via-points automáticos ao longo do plano global
+  global_plan_viapoint_sep: 1.0     # >0 para criar via-points automáticos ao longo do plano global
   global_plan_prune_distance: 1.0
 
   ####=== RATE / SAÍDAS ===####
@@ -102,3 +102,6 @@ TebLocalPlannerROS:
   force_reinit_new_goal_dist: 1.0
   # Para depuração:
   # publish_feedback: true
+
+  allow_robot_to_shrink: true
+  min_robot_radius: 0.20
