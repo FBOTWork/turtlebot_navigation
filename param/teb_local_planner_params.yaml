@@ -5,15 +5,15 @@ TebLocalPlannerROS:
   map_frame: map            # use "map" se seu /cmd_vel deve referenciar mapa global
 
   ####=== CINEMÁTICA DO ROBÔ (diferencial) ===####
-  max_vel_x: 0.5           # m/s
-  max_vel_x_backwards: 0.0  # m/s (permite ré curtinha)
+  max_vel_x: 0.3           # m/s
+  max_vel_x_backwards: 0.3  # m/s (permite ré curtinha)
   max_vel_theta: 1.50        # rad/s
-  acc_lim_x: 0.1            # m/s^2
+  acc_lim_x: 0.1             # m/s^2
   acc_lim_theta: 1.00        # rad/s^2
   min_turning_radius: 0.0    # diferencial
   wheelbase: 0.0             # diferencial
   cmd_angle_instead_rotvel: false
-  allow_backwards: false
+  allow_backwards: true
 
 
   ####=== TOLERÂNCIAS AO OBJETIVO ===####
@@ -34,7 +34,7 @@ TebLocalPlannerROS:
   publish_feedback: false
 
   ####=== OBSTÁCULOS / CUSTOS ===####
-  min_obstacle_dist: 0.20    # distância mínima aos obstáculos (combine com inflation)
+  min_obstacle_dist: 0.35    # distância mínima aos obstáculos (combine com inflation)
   inflation_dist: 0.40
   include_costmap_obstacles: true
   costmap_obstacles_behind_robot_dist: 1.5
@@ -47,7 +47,7 @@ TebLocalPlannerROS:
 
   ####=== RESTRIÇÕES DE CINEMÁTICA/CONTROLE ===####
   # penaliza dirigir para trás longas distâncias
-  weight_kinematics_forward_drive: 1.0
+  weight_kinematics_forward_drive: 45.0
   # para diferencial, manter não-holonômico ativo
   weight_kinematics_nh: 1000.0
   # suavidade de curvas (curvatura)
@@ -63,10 +63,10 @@ TebLocalPlannerROS:
   weight_max_vel_theta: 1.0
   weight_acc_lim_x: 1.0
   weight_acc_lim_theta: 1.0
-  weight_optimaltime: 1.0           # >1 dá caminhos mais curtos, <1 mais suaves
+  weight_optimaltime: 1.5          # >1 dá caminhos mais curtos, <1 mais suaves
   weight_obstacle: 50.0
   weight_inflation: 0.1
-  weight_dynamic_obstacle: 10.0      # só afeta se include_dynamic_obstacles = true
+  weight_dynamic_obstacle: 50.0      # só afeta se include_dynamic_obstacles = true
   weight_viapoint: 1.0               # use se você alimentar via-points
   weight_prefer_rotdir: 5.0
   weight_adapt_factor: 2.0
@@ -90,7 +90,7 @@ TebLocalPlannerROS:
   shrink_horizon_backup: true        # encolhe horizonte quando preso
   shrink_horizon_min_duration: 10.0
   oscillation_recovery: true         # alterna preferências p/ sair de oscilação
-  allow_init_with_backwards_motion: false
+  allow_init_with_backwards_motion: true
 
   ####=== COMPATIBILIDADE COM COSTMAP / GLOBAL PLAN ===####
   # Se o global planner publicar orientação alinhada ao gradiente do custo, mantenha true
