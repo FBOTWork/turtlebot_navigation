@@ -1,0 +1,14 @@
+scan_filter_chain:
+  - name: range
+    type: laser_filters/LaserScanRangeFilter
+    params:
+      lower_threshold: 0.05      # menor distância válida
+      upper_threshold: 10.0      # maior distância válida
+      lower_replacement_value: 0.0
+      upper_replacement_value: 0.0
+
+  - name: interpolate
+    type: laser_filters/InterpolationFilter
+    params:
+      check_for_zeros: true   # considera zeros como inválidos
+      max_range_gap: 5.0      # não interpola se a distância entre vizinhos válidos for maior que isso
