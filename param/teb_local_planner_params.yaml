@@ -1,7 +1,7 @@
 TebLocalPlannerROS:
 
   ####=== FRAMES / TÓPICOS ===####
-  odom_topic: odom  
+  odom_topic: odom/filtered  
   map_frame: map            # use "map" se seu /cmd_vel deve referenciar mapa global
 
   ####=== CINEMÁTICA DO ROBÔ (diferencial) ===####
