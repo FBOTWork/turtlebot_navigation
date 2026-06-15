@@ -1,7 +1,7 @@
 TebLocalPlannerROS:
 
   ####=== FRAMES / TÓPICOS ===####
-  odom_topic: odom
+  odom_topic: /odometry/filtered  # tópico de odometria (pode ser odom ou base_pose_ground_truth, etc.)
   map_frame: map            # use "map" se seu /cmd_vel deve referenciar mapa global
 
   ####=== CINEMÁTICA DO ROBÔ (diferencial) ===####
@@ -51,7 +51,7 @@ TebLocalPlannerROS:
   # para diferencial, manter não-holonômico ativo
   weight_kinematics_nh: 1000.0
   # suavidade de curvas (curvatura)
-  weight_kinematics_turning_radius: 0.0
+  weight_kinematics_turning_radius: 1.0
 
   ####=== OTIMIZAÇÃO (g2o) ===####
   no_inner_iterations: 5
